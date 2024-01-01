@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kanban</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Import sortable -->
+    <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="section">
+            <div class="columns is-vcentered">
+                <h1 class="title column">
+                    Kanban
+                </h1>
+                
+                <div class="column is-narrow">
+                    <button class="button is-success" id="addListButton">
+                        <span class="icon">
+                            <ion-icon name="add"></ion-icon>
+                        </span>
+                        &nbsp; Add new list
+                    </button>
+                </div>
+            </div>
+            
+            <!-- List container -->
+            <div class="columns list-container"></div>
+        </div>
+    </main>
+    
+    <!-- LIST TEMPLATE -->
+    <template id="listTemplate">
+        <div class="column is-one-third panel" data-list-id="" data-list-position="">
+            <div class="panel-heading has-background-info">
+                <div class="columns">
+                    <div class="column">
+                        <h2 class="has-text-white list-name"></h2>
+
+                        <form action="" method="POST" class="is-hidden">
+                            <input type="hidden" name="id" value="1">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input type="text" class="input is-small" name="name" value=""
+                                        placeholder="Nom de la liste">
+                                </div>
+                                <div class="control">
+                                    <button class="button is-small is-success">
+                                        <span class="icon has-text-white">
+                                            <ion-icon name="checkmark"></ion-icon>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="column is-narrow">
+                        <a href="#" id="addCardButton">
+                            <span class="icon has-text-white">
+                                <ion-icon name="add-circle"></ion-icon>
+                            </span>
+                        </a>
+                        <a href="#" id="deleteListButton">
+                            <span class="icon has-text-danger">
+                                <ion-icon name="trash"></ion-icon>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card container -->
+            <div class="panel-block is-block has-background-light"></div>
+        </div>
+    </template>
+
+    <!-- CARD TEMPLATE -->
+    <template id="cardTemplate">
+        <div class="box" data-card-id="" data-card-position="">
+            <div class="columns">
+                <div class="column card-name"></div>
+
+                <form action="" method="POST" class="column is-hidden">
+                    <input type="hidden" name="id" value="1">
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input is-small" name="title" value=""
+                                placeholder="Nom de la carte">
+                        </div>
+                        <div class="control">
+                            <button class="button is-small is-success">
+                                <span class="icon is-small has-text-white">
+                                    <ion-icon name="checkmark"></ion-icon>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="column is-narrow">
+                    <a href="#" id="editCardButton">
+                        <span class="icon is-small has-text-primary">
+                            <ion-icon name="pencil"></ion-icon>
+                        </span>
+                    </a>
+                    <a href="#" id="customTagButton">
+                        <span class="icon is-small has-text-primary">
+                            <ion-icon name="pricetag"></ion-icon>
+                        </span>
+                    </a>
+                    <a href="#" id="deleteCardButton">
+                        <span class="icon is-small has-text-danger">
+                            <ion-icon name="trash"></ion-icon>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tags container -->
+            <div class="tags"></div>
+        </div>
+    </template>
+
+
+    <!-- LIST MODAL -->
+    <div class="modal" id="addListModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <form action="" method="POST" id="addListForm">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Create a new list</p>
+                    <button class="delete close" type="button" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input type="text" class="input" name="name" placeholder="List name">
+                            <input type="hidden" type="number" name="position">
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success" id="createListButton">Create</button>
+                    <button class="button close" type="button">Cancel</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- CARD MODAL -->
+    <div class="modal" id="addCardModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <form action="" method="POST" id="addCardForm">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Add a new card to the list</p>
+                    <button class="delete close" type="button" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label">Card title</label>
+                        <div class="control">
+                            <input type="text" class="input" name="title" placeholder="Card title">
+                            <input type="hidden" type="number" name="list_id">
+                            <input type="hidden" type="number" name="position">
+                        </div>
+                    </div>
+                    
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success" id="createListButton">Add</button>
+                    <button class="button close" type="button">Cancel</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- TAG MODAL -->
+    <div class="modal" id="addTagModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <form action="" method="POST" id="addTagForm">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Personalize tags</p>
+                    <button class="delete close" type="button" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <input type="hidden" type="number" name="id">
+                    <div class="field"></div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success" id="updateTagButton">Save</button>
+                    <button class="button close" type="button">Cancel</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+
+
+    <script type="module" src="./js/app.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

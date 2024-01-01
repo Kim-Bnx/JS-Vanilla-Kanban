@@ -1,0 +1,19 @@
+### Delete item
+DELETE http://localhost:8000/lists/9 HTTP/1.1
+
+
+
+
+
+
+
+
+
+
+### Update card's tags
+PATCH http://localhost:8000/cards/3/tags HTTP/1.1
+content-type: application/json
+
+{ 
+    "tagsId": "[1, 2]"
+}
