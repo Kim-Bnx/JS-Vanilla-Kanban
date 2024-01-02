@@ -23,7 +23,7 @@ app.use(cors('*'));
 app.use(bodySanitizer);
 
 // Root for static files
-app.use('/', express.static(path.join(__dirname, 'public/assets')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use(router);
 
