@@ -1,6 +1,7 @@
 require('dotenv').config();
 const 
     express = require('express'),
+    path = require('path'),
     router = require("./app/router"),
     cors = require("cors"),
     bodySanitizer = require('./app/middlewares/body-sanitizer'),
@@ -22,7 +23,7 @@ app.use(cors('*'));
 app.use(bodySanitizer);
 
 // Root for static files
-app.use('/', express.static('public/assets'));
+app.use('/', express.static(path.join(__dirname, 'public/assets')));
 
 app.use(router);
 
