@@ -6,6 +6,9 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   define: {
     underscored: true,
   },
+  dialectOptions: {
+    ssl: {require: true}
+  }
 });
 
 module.exports = sequelize;
