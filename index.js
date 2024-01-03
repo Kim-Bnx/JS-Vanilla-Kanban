@@ -1,11 +1,13 @@
-require('dotenv').config();
 const 
+    dotenv = require('dotenv'),
     express = require('express'),
     path = require('path'),
     router = require("./app/router"),
     cors = require("cors"),
     bodySanitizer = require('./app/middlewares/body-sanitizer'),
     multer = require("multer");
+
+dotenv.config();
 
 // Initialize Express
 const app = express();
