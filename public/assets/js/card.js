@@ -61,7 +61,7 @@ const cardModule = {
 
     let response;
     try {
-      response = await fetch(utils.base_url + '/cards', {
+      response = await fetch('/cards', {
         method: 'POST',
         headers: { 
           'accept': 'application/json',
@@ -113,7 +113,7 @@ const cardModule = {
     
     let response;
     try{
-      response = await fetch(utils.base_url + '/cards/' + payload.id, {
+      response = await fetch('/cards/' + payload.id, {
         method: 'PATCH',
         headers: {
           'accept': 'application/json',
@@ -147,7 +147,7 @@ const cardModule = {
     if(confirm) {
       let response;
       try {
-        response = await fetch(utils.base_url + '/cards/' + deletedCard.dataset.cardId, { 
+        response = await fetch('/cards/' + deletedCard.dataset.cardId, { 
           method: 'DELETE',
           headers: {
             "Content-Type": "application/json",
@@ -196,7 +196,7 @@ const cardModule = {
 
       let response;
       try {
-      response = await fetch(utils.base_url + '/cards/' + cards.dataset.cardId, {
+      response = await fetch('/cards/' + cards.dataset.cardId, {
           method: 'PATCH',
           headers: { 
           'accept': 'application/json',

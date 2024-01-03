@@ -56,7 +56,7 @@ const listModule = {
 
     let response;
     try {
-      response = await fetch(utils.base_url + '/lists', { 
+      response = await fetch('/lists', { 
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -103,7 +103,7 @@ const listModule = {
 
     let response;
     try {
-      response = await fetch(utils.base_url + '/lists/' + editedList.dataset.listId, {
+      response = await fetch('/lists/' + editedList.dataset.listId, {
         method: 'PATCH',
         headers: {
           'accept': 'application/json',
@@ -141,7 +141,7 @@ const listModule = {
     if(confirm) {
       let response;
       try {
-        response = await fetch(utils.base_url + '/lists/' + deletedList.dataset.listId, { 
+        response = await fetch('/lists/' + deletedList.dataset.listId, { 
           method: 'DELETE',
           headers: {
             "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const listModule = {
 
       let response;
       try {
-      response = await fetch(utils.base_url + '/lists/' + lists.dataset.listId, {
+      response = await fetch('/lists/' + lists.dataset.listId, {
           method: 'PATCH',
           headers: { 
           'accept': 'application/json',

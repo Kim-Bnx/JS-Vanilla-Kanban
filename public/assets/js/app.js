@@ -36,7 +36,7 @@ const app = {
   getListFromAPI: async function() {
     let response;
     try {
-      response = await fetch(utils.base_url + '/lists', { method: 'GET' });
+      response = await fetch('/lists', { method: 'GET' });
     } catch (error) { console.error(error); }
 
     if(response && response.ok) {

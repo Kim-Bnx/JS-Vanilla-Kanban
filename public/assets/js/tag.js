@@ -57,7 +57,7 @@ const tagModule = {
         let response;
         try {
             // Fetch all the API tags to display them in the form
-            response = await fetch(utils.base_url + '/tags', {method: 'GET' });
+            response = await fetch('/tags', {method: 'GET' });
 
             if(response.ok) {
                 const tags = await response.json();
@@ -115,7 +115,7 @@ const tagModule = {
 
         let response;
         try {
-        response = await fetch(utils.base_url + '/cards/' + param.id + '/tags', {
+        response = await fetch('/cards/' + param.id + '/tags', {
             method: 'PATCH',
             headers: { 
             'accept': 'application/json',
