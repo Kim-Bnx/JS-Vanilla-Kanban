@@ -4,7 +4,11 @@
 
 This project is the result of almost 4 months of my Javascript courses. The goal was to make a fullstack application that would cover all the development process. From building the database structure to make a RESTful API, to the creation of client interractions in a single page application.
 
-### [Check out the demo](https://js-vanilla-kanban.vercel.app/) :rocket:
+It was also the occasion to deploy an application for the first time! After some twist, I understood the importance to have a good dev environnement. *(I promesed myself to never again start a project without Vite or Parcel)* 
+
+The database is host on [Neon](https://neon.tech/) and the front on [Vercel](https://vercel.com/home). So ↓↓
+
+### [Check out the demo](https://js-vanilla-kanban-kimbnxs-projects.vercel.app/) :rocket:
 (Leave a note in a new card so everyone can read it!)
 
 
