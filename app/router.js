@@ -9,7 +9,7 @@ const tagController = require("./controllers/tagController");
 const errorController = require('./controllers/errorController');
 
 router.get("/", (_, res) => { 
-  let filePath = path.join(__dirname, "../public/index.html"); 
+  let filePath = path.join(__dirname, "../dist/index.html"); 
   res.sendFile(filePath); 
 });
 

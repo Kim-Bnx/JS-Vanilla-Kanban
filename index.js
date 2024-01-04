@@ -1,13 +1,11 @@
+require('dotenv').config();
 const 
-    dotenv = require('dotenv'),
     express = require('express'),
     path = require('path'),
     router = require("./app/router"),
     cors = require("cors"),
     bodySanitizer = require('./app/middlewares/body-sanitizer'),
     multer = require("multer");
-
-dotenv.config();
 
 // Initialize Express
 const app = express();
@@ -25,7 +23,7 @@ app.use(cors('*'));
 app.use(bodySanitizer);
 
 // Root for static files
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'dist')));
 
 app.use(router);
 
